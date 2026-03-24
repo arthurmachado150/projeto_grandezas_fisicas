@@ -9,16 +9,22 @@
 <body>
     <header>
         <nav>
-            <a href="../index.html">Introdução</a>
-            <a href="./temperatura_e_calor.html">Temperatura / Calor</a>
-            <a href="./medida.html">Medida</a>
-            <a href="./sensores_e_termopares.html">Sensores / Termopares</a>
-            <a href="./selecao_sensor_teperatura.html">Seleção de Sensores de Temperatura</a>
-            <a href="./arduino_e_clp.html">Arduino / CLP</a>
+            <a href="../index.html"> (Introdução) </a>
+            <a href="./temperatura_e_calor.html"> (Temperatura / Calor) </a>
+            <a href="./medida.html"> (Medida) </a>
+            <a href="./sensores_e_termopares.html"> (Sensores / Termopares) </a>
+            <a href="./selecao_sensor_teperatura.html"> (Seleção de Sensores de Temperatura) </a>
+            <a href="./multiplos_submultiplos.html"> (Múltiplos e Submúltiplos) </a>
+            <a href="./conceitos_e_componentes.html"> (Conceitos e Componentes) </a>
+            <a href="./conclusao.html"> (Conclusão) </a>
         </nav>
     </header>
     <main>
         <h1 class="h1">Arduino</h1>
+        <br><br><br>
+        <div>
+            <img src="../img/foto_arduino.jpg" width="360px">
+        </div>
         <br><br><br>
         <h2>Definição</h2>
         <br>
@@ -26,7 +32,7 @@
         <br><br><br>
         <h2>Escala Analógica</h2>
         <br><br><br>
-        <p>A escala analógica padrão na maioria das placas Arduino (como Uno, Nano, Mega) é de 0 a 1023 (entrada) e de 0 a 255 (saída).</p>
+        <p>A escala analógica do Arduino, nas placas mais comuns como Uno, Nano e Mega, possui resolução de 10 bits na entrada, variando de 0 a 1023, representando tensões geralmente entre 0 e 5 volts. Já na saída, os valores variam de 0 a 255, pois é utilizada a técnica de PWM, com resolução de 8 bits.</p>
         <br><br><br>
         <h2>Entrada Analógica e Entrada Dijital</h2>
         <br>
@@ -36,20 +42,31 @@
         <br><br><br>
         <h2>Saída Analógica (PWM)</h2>
         <br>
-        <p></p>
+        <p>A saída analógica do Arduino refere-se ao PWM (Modulação por Largura de Pulso). Nesse método, o sinal não é contínuo, mas sim digital, alternando rapidamente entre ligado e desligado. A variação do tempo em que o sinal permanece ligado permite simular diferentes níveis de tensão média.</p>
         <br>
         <hr>
         <br>
         <h1 class="h1">CLP (Modelo da CPU 1214c do tipo DC/DC/DC)</h1>
         <br><br><br>
+        <div>
+            <img src="../img/imagem_clp.jpg" width="360px">
+        </div>
+        <br><br><br>
         <h2>Definição</h2>
         <br>
         <p>O CLP (Controlador Lógico Programável) é um equipamento eletrônico industrial projetado para automatizar e controlar máquinas e processos. Ele é composto por hardware robusto, capaz de operar em ambientes industriais, e por software de programação, usado para criar lógicas de controle baseadas em entradas e saídas. Seu objetivo principal é executar comandos de forma confiável, contínua e segura, substituindo sistemas antigos baseados em relés e temporizadores eletromecânicos.</p>
         <br><br><br>
+        <h2>Escala Analógica</h2>
+        <br>
+        <p>A escala analógica em CLPs representa sinais contínuos, como 0 a 10 V ou 4 a 20 mA, convertidos em valores digitais internos. Geralmente, essa conversão ocorre em uma faixa como 0 a 27648 para 0-10 V, ou aproximadamente 5530 a 27648 para 4-20 mA, permitindo que o CLP processe os sinais com precisão.</p>
+        <br><br><br>
         <h2>Entrada Analógica e Entrada Dijital</h2>
         <br>
         <p>Em um CLP, a entrada analógica é utilizada para ler sinais contínuos provenientes de sensores industriais. Ela trabalha com escalas padronizadas, como 0 a 10 V, ±10 V ou 4 a 20 mA, convertendo esses valores elétricos em números que representam variações graduais de grandezas físicas, como temperatura, pressão ou nível.</p>
+        <br><br><br>
+        <h2>Saída Analógica</h2>
         <br>
+        <p>A saída analógica no CLP é um sinal contínuo e real, diferente do Arduino. Ela pode fornecer diretamente valores de tensão (0 a 10 V) ou corrente (4 a 20 mA), sendo utilizada no controle de equipamentos industriais, como motores, válvulas e inversores de frequência.</p>
         <br>
         <hr>
         <br>
