@@ -47,6 +47,31 @@
         <div>
             <video src="" type="video/mp4" controls width="360px"></video>
         </div>
+        <br><br><br>
+        <h2>Código: </h2>
+        <br>
+        <p>
+            int saida = 9, incremento = 1, brilho = 0;
+
+            void setup() {
+                pinMode(saida, OUTPUT);
+                Serial.begin(9600);
+            }
+
+            void loop() {
+                analogWrite(saida, brilho);
+                Serial.print("Valor: ");
+                Serial.println(brilho);
+                brilho = brilho + incremento;
+
+                if(brilho <= 0 || brilho >= 255){
+                    incremento = - incremento;
+                }
+
+                delay(100);
+
+            }
+        </p>
         <br>
         <hr>
         <br>
@@ -67,6 +92,51 @@
         <div>
             <video src="../video/video_circuito_fisico_prog_analog_saida_dois_botoes_e_led.mp4" type="video/mp4" controls width="360px"></video>
         </div>
+        <br><br><br>
+        <h2>Código:</h2>
+        <br>
+        <p>
+            
+            int contador = 0;
+
+            int btp = 3, btpdois = 6, led = 11;
+
+            void setup() {
+                pinMode(btp, INPUT);
+                pinMode(btpdois, INPUT);
+                pinMode(led, OUTPUT);
+                // faça a leitura a cada 104 micro segundos
+                Serial.begin(9600);
+            }
+
+            void loop() {
+
+                if(digitalRead(btp) == HIGH){
+
+                    if(contador <= 255){
+                        contador += 5;
+                    }
+
+                    analogWrite(led, contador);
+
+                    delay(50);
+
+                }
+
+                if(digitalRead(btpdois) == HIGH){
+
+                    if(contador > 0){
+                        contador -= 5;
+                    }
+
+                    analogWrite(led, contador);
+
+                    delay(50);
+
+                }
+
+            }
+</p>
         <br>
         <hr>
         <br>
@@ -129,6 +199,42 @@
         <div>
             <img src="../img/foto_medicao_led_circuito_prog_saida_analog_127_mv.jpeg" width="360px">
         </div>
+        <br><br><br>
+        <h2>Código Circuito Físico - Dimerização em Saída analógica (PWM - 255) para LED:</h2>
+        <br>
+        <p>
+            int led = 9;
+
+            void setup() {
+                pinMode(led, OUTPUT);
+            }
+
+            void loop() {
+                // 255 equivale a 5 V
+                analogWrite(led, 255);
+
+                delay(10);
+
+            }
+        </p>
+        <br><br><br>
+        <h2>Código Circuito Físico - Dimerização em Saída analógica (PWM - 127) para LED:</h2>
+        <br>
+        <p>
+            int led = 9;
+
+            void setup() {
+                pinMode(led, OUTPUT);
+            }
+
+            void loop() {
+                // 127 equivale a 2,5 V
+                analogWrite(led, 127);
+
+                delay(10);
+
+            }
+        </p>
         <br>
         <hr>
         <br>
