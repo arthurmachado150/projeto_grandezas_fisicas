@@ -97,6 +97,60 @@
             <video src="../video/video_circuito_fisico_em_funcionamento_sensor_ultrassonico_led.mp4" type="video/mp4" controls width="360px"></video>
         </div>
         <br><br><br>
+        <h2>Código: </h2>
+        <br>
+        <p>
+            // Definição dos pinos
+            const int pinoTrig = 12;
+            const int pinoEcho = 13;
+            const int pinoLED = 7;
+
+            // Configurações de controle
+            const float distanciaMin = 20.0; // Distância de ativção em cm
+            const float distanciaMax = 200.0; // Distância de ativção em cm
+
+            // Variáveis para o cálculo
+            float duracaoPulso = 0.0;
+            float distanciaCM = 0.0;
+
+            void setup() {
+                pinMode(pinoTrig, OUTPUT);
+                pinMode(pinoEcho, INPUT);
+                pinMode(pinoLED, OUTPUT); // Configura o pino do LED como saída
+
+                Serial.begin(9600);
+
+                digitalWrite(pinoTrig, LOW);
+                delayMicroseconds(2);
+            }
+
+            void loop() {
+                // 1. Disparo do sensor
+                digitalWrite(pinoTrig, HIGH);
+                delayMicroseconds(10);
+                digitalWrite(pinoTrig, LOW);
+
+                duracaoPulso = pulseIn(pinoEcho, HIGH); // 2. Leitura do tempo de resposta
+
+                distanciaCM = (duracaoPulso * 0.0343) / 2; // 3. Cálculo da distância
+
+                // 4. Lógica do LED (Indicador de proximidade)
+                if(distanciaCM >= distanciaMin && distanciaCM <= distanciaMax) {
+                    digitalWrite(pinoLED, HIGH); // Liga o LED se estiver perto
+                    Serial.print("ALERTA: Objeto detectado! ");
+                } else {
+                    digitalWrite(pinoLED, LOW); // Desliga o LED se estiver longe
+                }
+
+                Serial.print("Distancia: "); // Monitoramento
+                Serial.print(distanciaCM);
+                Serial.println(" cm");
+                delay(200); // Leitura mais rápida para maior responsividade
+            }
+        </p>
+        <br>
+        <hr>
+        <br>
         <h2>Circuito Tinkercad (1 Resistor, 1 Sensor Ultrassônico e 1 Display de 7 Segmentos) - Se detecta um objeto, acende o Display de 7 Segmentos (Se o valor da distância subtraida por 20 for 0 o Display mostra 0, se for 1 o Display mostra 1, e assim assim sucessivamente)</h2>
         <br>
         <div>
@@ -114,6 +168,144 @@
         <div>
             <video src="" type="video/mp4" controls width="360px"></video>
         </div>
+        <br><br><br>
+        <h2>Código: </h2>
+        <br>
+        <p>
+            int trig = 12;
+            int echo = 13;
+
+            int pinoA = 1;
+            int pinoB = 2;
+            int pinoC = 3;
+            int pinoD = 4;
+            int pinoE = 5;
+            int pinoF = 6;
+            int pinoG = 7;
+
+            void setup() {
+                pinMode(trig, OUTPUT);
+                pinMode(echo, INPUT);
+
+                pinMode(pinoA, OUTPUT);
+                pinMode(pinoB, OUTPUT);
+                pinMode(pinoC, OUTPUT);
+                pinMode(pinoD, OUTPUT);
+                pinMode(pinoE, OUTPUT);
+                pinMode(pinoF, OUTPUT);
+                pinMode(pinoG, OUTPUT);
+
+                Serial.begin(9600);
+            }
+
+            void loop() {
+                digitalWrite(trig, LOW);
+                delayMicroseconds(2);
+                digitalWrite(trig, HIGH);
+                delayMicroseconds(10);
+                digitalWrite(trig, LOW);
+
+                float duracao = pulseIn(echo, HIGH);
+                float distancia = (duracao * 0.0340) / 2.0;
+                int valor = 0;
+
+
+                if(distancia >= 20 && distancia < 30){
+                    valor = (int)(distancia - 20.0);
+                }
+                Serial.print("Distancia: ");
+                Serial.print(distancia);
+                Serial.print(" cm -> valor: ");
+                Serial.println(valor);
+                verNumero(valor);
+
+                delay(500);
+            }
+
+            void verNumero(int num) {
+                if(num == 0){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, HIGH);
+                    digitalWrite(pinoF, HIGH);
+                    digitalWrite(pinoG, LOW);
+                }else if(num == 1){
+                    digitalWrite(pinoA, LOW);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, LOW);
+                    digitalWrite(pinoE, LOW);
+                    digitalWrite(pinoF, LOW);
+                    digitalWrite(pinoG, LOW);
+                }else if(num == 2){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, LOW);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, HIGH);
+                    digitalWrite(pinoF, LOW);
+                    digitalWrite(pinoG, HIGH);
+                }else if(num == 3){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, LOW);
+                    digitalWrite(pinoF, LOW);
+                    digitalWrite(pinoG, HIGH);
+                }else if(num == 4){
+                    digitalWrite(pinoA, LOW);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, LOW);
+                    digitalWrite(pinoE, LOW);
+                    digitalWrite(pinoF, HIGH);
+                    digitalWrite(pinoG, HIGH);
+                }else if(num == 5){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, LOW);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, LOW);
+                    digitalWrite(pinoF, HIGH);
+                    digitalWrite(pinoG, HIGH);
+                }else if(num == 6){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, LOW);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, HIGH);
+                    digitalWrite(pinoF, HIGH);
+                    digitalWrite(pinoG, HIGH);
+                }else if(num == 7){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, LOW);
+                    digitalWrite(pinoE, LOW);
+                    digitalWrite(pinoF, LOW);
+                    digitalWrite(pinoG, LOW);
+                }else if(num == 8){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, HIGH);
+                    digitalWrite(pinoF, HIGH);
+                    digitalWrite(pinoG, HIGH);
+                }else if(num == 9){
+                    digitalWrite(pinoA, HIGH);
+                    digitalWrite(pinoB, HIGH);
+                    digitalWrite(pinoC, HIGH);
+                    digitalWrite(pinoD, HIGH);
+                    digitalWrite(pinoE, LOW);
+                    digitalWrite(pinoF, HIGH);
+                    digitalWrite(pinoG, HIGH);
+                }
+            }
+        </p>
         <br>
         <hr>
         <br>

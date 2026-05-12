@@ -90,6 +90,78 @@
         <div>
             <video src="../video/video_circuito_fisico_funcionamento_ponte_wheatstone_com_potenciometro_e_leds.mp4" type="video/mp4" controls width="360px"></video>
         </div>
+        <br><br><br>
+        <h2>Código: </h2>
+        <br>
+        <p>
+            // Definição dos pinos
+            int pinoPot = A0;   
+            int ledNegativo = 8;  
+            int ledZero = 10;     
+            int ledPositivo = 12; 
+
+            // Referência teórica (2.5V = 512 bits)
+            int valorReferencia = 512; 
+
+            // --- AUMENTE ESTE VALOR PARA UMA MARGEM MAIOR ---
+            // Com 50, a zona central vai de 462 a 562 (512 +/- 50)
+            int margem = 50;  
+
+            void setup() {
+                Serial.begin(9600);
+                
+                pinMode(ledNegativo, OUTPUT);
+                pinMode(ledZero, OUTPUT);
+                pinMode(ledPositivo, OUTPUT);
+
+                Serial.println("--- Monitor de Nivel: Ponte de Wheatstone ---");
+                Serial.print("Referencia: "); Serial.println(valorReferencia);
+                Serial.print("Margem de Equilíbrio: +/- "); Serial.println(margem);
+                Serial.println("--------------------------------------------");
+            }
+
+            void loop() {
+                int leituraA0 = analogRead(pinoPot);
+                int diferencaBits = leituraA0 - valorReferencia;
+
+                // Lógica de acionamento dos LEDs e mensagens seriais
+                if (diferencaBits < -margem) {
+                    // ABAIXO DO EQUILÍBRIO
+                    digitalWrite(ledNegativo, HIGH);
+                    digitalWrite(ledZero, LOW);
+                    digitalWrite(ledPositivo, LOW);
+                    Serial.print("[ BAIXO ]  ");
+                } 
+                else if (diferencaBits > margem) {
+                    // ACIMA DO EQUILÍBRIO
+                    digitalWrite(ledNegativo, LOW);
+                    digitalWrite(ledZero, LOW);
+                    digitalWrite(ledPositivo, HIGH);
+                    Serial.print("[ ALTO  ]  ");
+                } 
+                else {
+                    // NA ZONA DE EQUILÍBRIO (MARGEM)
+                    digitalWrite(ledNegativo, LOW);
+                    digitalWrite(ledZero, HIGH);
+                    digitalWrite(ledPositivo, LOW);
+                    Serial.print("[ ZERO  ]  ");
+                }
+
+                // Dados técnicos para acompanhamento
+                Serial.print("Leitura A0: ");
+                Serial.print(leituraA0);
+                Serial.print(" | Delta: ");
+                Serial.print(diferencaBits);
+                
+                // Mostra a tensão diferencial aproximada
+                float vDiff = (diferencaBits * 5.0) / 1023.0;
+                Serial.print(" | V_diff: ");
+                Serial.print(vDiff, 2);
+                Serial.println(" V");
+
+                delay(500); 
+            }
+        </p>
         <br>
         <hr>
         <br>
